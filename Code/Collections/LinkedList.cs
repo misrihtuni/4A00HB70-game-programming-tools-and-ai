@@ -125,21 +125,24 @@ namespace GA.Collections
 			}
 
 			Node current = Head;
+			Node next = null;
 			Node previous = null;
 
 			while (current != null)
 			{
 				if (EqualityComparer<T>.Default.Equals(current.Value, item))
 				{
-					if (previous != null)
-					{
-						// Removing any other element than the first.
-						previous.Next = current.Next;
-					}
-					else
+					if (previous == null)
 					{
 						// Removing the first element.
 						Head = current.Next;
+						Head.Previous = null;
+					}
+					else
+					{
+						// Removing any other element than the first.
+						previous.Next = current.Next;
+
 					}
 
 					Count--;
