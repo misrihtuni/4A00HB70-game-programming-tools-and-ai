@@ -9,15 +9,17 @@ namespace GA.Collections
 		{
 			public T Value { get; set; }
 			public Node Next { get; set; }
+			public Node Previous { get; set; }
 
 			public Node() : this(default(T))
 			{
 			}
 
-			public Node(T value, Node next = null)
+			public Node(T value, Node next = null, Node previous = null)
 			{
 				Value = value;
 				Next = next;
+				Previous = previous;
 			}
 		}
 
@@ -25,6 +27,11 @@ namespace GA.Collections
 		/// The head of the linked list. When the list is empty, this will be null.
 		/// </summary>
 		protected Node Head { get; set; } = null;
+
+		/// <summary>
+		/// The tail of the linked list. When the list is empty, this will be null.
+		/// </summary>
+		protected Node Tail { get; set; } = null;
 
 		public int Count { get; private set; } = 0;
 
