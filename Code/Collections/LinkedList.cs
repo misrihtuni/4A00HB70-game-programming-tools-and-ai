@@ -82,6 +82,7 @@ namespace GA.Collections
 			}
 
 			Head = null;
+			Tail = Head;
 			Count = 0;
 		}
 
