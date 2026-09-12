@@ -12,5 +12,6 @@ public class LinkedListTests
 		list.Add(-1);
 
 		Assert.Equal(3, list.Count);
+		Assert.Equal("1,6,-1", list.TestGetAsString());
 	}
 }
