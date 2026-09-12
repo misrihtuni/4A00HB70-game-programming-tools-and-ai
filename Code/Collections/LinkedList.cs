@@ -118,33 +118,78 @@ namespace GA.Collections
 			}
 
 			Node current = Head;
-			Node next = null;
-			Node previous = null;
+			//Node next = null;
+			//Node previous = null;
 
 			while (current != null)
 			{
+				// There are still items in the list that haven't been checked.
 				if (EqualityComparer<T>.Default.Equals(current.Value, item))
 				{
-					if (previous == null)
+					// The current node contains the item to remove.
+					// Cache refs to both the next node and the previous node.
+					Node next = current.Next;
+					Node previous = current.Previous;
+
+					if (Head == Tail)
 					{
-						// Removing the first element.
-						Head = current.Next;
-						Head.Previous = null;
+						// Removing the only item in the list.
+						Head = null;
+						Tail = null;
+						return true;
+					}
+					else if (current.Previous == null)
+					{
+						// Removing the first element in the list.
+						next.Previous = null;
+						Head = next;
+					}
+					else if (current.Next == null)
+					{
+						// Removing the last element in the list.
+						previous.Next = null;
+						Tail = previous;
 					}
 					else
 					{
-						// Removing any other element than the first.
-						previous.Next = current.Next;
-
+						// Removing any other element in the list.
+						previous.Next = next;
+						next.Previous = previous;
 					}
 
 					Count--;
 					return true;
 				}
 
-				previous = current;
+				// Move on to the next node.
 				current = current.Next;
 			}
+
+			// while (current != null)
+			// {
+			// 	if (EqualityComparer<T>.Default.Equals(current.Value, item))
+			// 	{
+			// 		// Current node has the item to be removed.
+			// 		if (previous == null)
+			// 		{
+			// 			// Removing the first element.
+			// 			Head = current.Next;
+			// 			Head.Previous = null;
+			// 		}
+			// 		else
+			// 		{
+			// 			// Removing any other element than the first.
+			// 			previous.Next = current.Next;
+
+			// 		}
+
+			// 		Count--;
+			// 		return true;
+			// 	}
+
+			// 	previous = current;
+			// 	current = current.Next;
+			// }
 
 			return false;
 		}
