@@ -52,16 +52,9 @@ namespace GA.Collections
 				Head = node;
 				Tail = Head;
 			}
-			else if (Tail == Head)
-			{
-				// When the list has only 1 item.
-				Tail = node;
-				Tail.Previous = Head;
-				// Tail.Next automatically points to null here because of the Node's constructor.
-			}
 			else
 			{
-				// When the list has more than 1 item.
+				// When the list is not empty.
 				// 1. Register new node as the next item in the list.
 				// 2. Tell new node where the current tail is.
 				// 3. Make new node the new tail of the list.
