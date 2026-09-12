@@ -136,7 +136,6 @@ namespace GA.Collections
 						// Removing the only item in the list.
 						Head = null;
 						Tail = null;
-						return true;
 					}
 					else if (current.Previous == null)
 					{
