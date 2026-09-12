@@ -154,5 +154,67 @@ namespace GA.Collections
 			return GetEnumerator();
 		}
 
+		#region For Testing Only!
+		/// <summary>
+		/// This method is for testing purposes only.<br/>
+		/// Returns the value stored at the given index.
+		/// </summary>
+		///
+		/// <remarks>
+		/// This method will always start from <see cref="Head"/> and traverse
+		/// the list until the counter hits the given <paramref name="index"/>.
+		/// Complexity is O(n).
+		/// </remarks>
+		public T TestGetValue(int index)
+		{
+			if (Count == 0)
+			{
+				throw new System.InvalidOperationException("The list is empty.");
+			}
+			else if (index >= Count || index < 0)
+			{
+				throw new System.ArgumentOutOfRangeException(nameof(index));
+			}
+
+			Node currentNode = Head;
+			int currentIndex = 0;
+
+			while (currentIndex != index)
+			{
+				currentNode = currentNode.Next;
+				currentIndex++;
+			}
+
+			return currentNode.Value;
+		}
+
+		/// <summary>
+		/// This method is for testing purposes only.<br/>
+		/// Returns the list as a string where the values are separated with
+		/// commas.
+		/// </summary>
+		///
+		/// <remarks>
+		/// This method will always traverse the whole list.
+		/// Complexity is O(n).
+		/// </remarks>
+		public string TestGetAsString()
+		{
+			string text = "";
+			Node current = Head;
+
+			while (current != null)
+			{
+				text += $"{current.Value}";
+				if (current.Next != null)
+				{
+					text += ",";
+				}
+				current = current.Next;
+			}
+
+			return text;
+		}
+		#endregion For Testing Only!
 	}
 }
