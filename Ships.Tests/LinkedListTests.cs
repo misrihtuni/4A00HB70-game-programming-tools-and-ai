@@ -127,56 +127,110 @@ public class LinkedListTests
 	#endregion Contains
 
 
-	#region Removing Items
+	#region Remove
 
 	[Fact]
-	public void TestRemoveSingle()
+	public void Remove_WhenEmpty_ReturnsFalseAndLeavesUnchanged()
 	{
-		GA.Collections.LinkedList<int> list = [1];
-		Assert.True(list.Remove(1));
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+
+		bool result = list.Remove(99);
+
+		Assert.False(result);
 		Assert.Empty(list);
 		Assert.Equal(0, list.Count);
 		Assert.Equal("", list.TestGetAsString());
 	}
 
 	[Fact]
-	public void TestRemoveFirst()
+	public void Remove_WhenNotFound_ReturnsFalseAndLeavesUnchanged()
 	{
-		GA.Collections.LinkedList<int> list = [1, 0, 3, 0, 5];
-		Assert.True(list.Remove(1));
-		Assert.Equal(4, list.Count);
-		Assert.Equal("0,3,0,5", list.TestGetAsString());
-	}
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+		list.Add(2);
+		list.Add(3);
 
-	[Fact]
-	public void TestRemoveFromMiddle()
-	{
-		GA.Collections.LinkedList<int> list = [1, 0, 3, 0, 5];
-		Assert.True(list.Remove(3));
-		Assert.Equal(4, list.Count);
-		Assert.Equal("1,0,0,5", list.TestGetAsString());
-	}
+		bool result = list.Remove(99);
 
-	[Fact]
-	public void TestRemoveDuplicate()
-	{
-		GA.Collections.LinkedList<int> list = [1, 0, 3, 0, 5];
-		Assert.True(list.Remove(0));
-		Assert.Equal(4, list.Count);
-		Assert.Equal("1,3,0,5", list.TestGetAsString());
-		Assert.True(list.Remove(0));
+		Assert.False(result);
 		Assert.Equal(3, list.Count);
-		Assert.Equal("1,3,5", list.TestGetAsString());
+		Assert.Equal("1,2,3", list.TestGetAsString());
 	}
 
 	[Fact]
-	public void TestRemoveLast()
+	public void Remove_WhenOnlyItem_ReturnsTrueAndClearsList()
 	{
-		GA.Collections.LinkedList<int> list = [1, 0, 3, 0, 5];
-		Assert.True(list.Remove(5));
-		Assert.Equal(4, list.Count);
-		Assert.Equal("1,0,3,0", list.TestGetAsString());
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+
+		bool result = list.Remove(1);
+
+		Assert.True(result);
+		Assert.Empty(list);
+		Assert.Equal(0, list.Count);
+		Assert.Equal("", list.TestGetAsString());
 	}
 
-	#endregion Removing Items
+	[Fact]
+	public void Remove_WhenFirstItem_ReturnsTrueAndRemovesGiven()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+		list.Add(2);
+		list.Add(3);
+
+		bool result = list.Remove(1);
+
+		Assert.True(result);
+		Assert.Equal(2, list.Count);
+		Assert.Equal("2,3", list.TestGetAsString());
+	}
+
+	[Fact]
+	public void Remove_WhenMiddleItem_ReturnsTrueAndRemovesGiven()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+		list.Add(2);
+		list.Add(3);
+
+		bool result = list.Remove(2);
+
+		Assert.True(result);
+		Assert.Equal(2, list.Count);
+		Assert.Equal("1,3", list.TestGetAsString());
+	}
+
+	[Fact]
+	public void Remove_WhenLastItem_ReturnsTrueAndRemovesGiven()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+		list.Add(2);
+		list.Add(3);
+
+		bool result = list.Remove(3);
+
+		Assert.True(result);
+		Assert.Equal(2, list.Count);
+		Assert.Equal("1,2", list.TestGetAsString());
+	}
+
+	[Fact]
+	public void Remove_WhenDuplicatesExist_ReturnsTrueAndRemovesFirstOccurence()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+		list.Add(2);
+		list.Add(3);
+		list.Add(1);
+
+		bool result = list.Remove(1);
+
+		Assert.True(result);
+		Assert.Equal(3, list.Count);
+		Assert.Equal("2,3,1", list.TestGetAsString());
+	}
+
+	#endregion Remove
 }
