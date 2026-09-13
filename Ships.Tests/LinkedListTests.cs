@@ -305,4 +305,61 @@ public class LinkedListTests
 	}
 
 	#endregion Remove
+
+
+	#region GetEnumerator
+
+	[Fact]
+	public void GetEnumerator_WhenEmpty_YieldNothing()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+
+		List<int> result = new List<int>();
+		foreach (int item in list)
+		{
+			result.Add(item);
+		}
+
+		Assert.Empty(result);
+	}
+
+	[Fact]
+	public void GetEnumerator_WhenOnlyOneItem_YieldOnlyItem()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+
+		List<int> result = new List<int>();
+		foreach (int item in list)
+		{
+			result.Add(item);
+		}
+
+		Assert.Single(result);
+		Assert.Equal(1, result[0]);
+	}
+
+	[Fact]
+	public void GetEnumerator_WhenMultipleItems_YieldAllItemsInOrder()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+		list.Add(2);
+		list.Add(3);
+		list.Add(1);
+
+		List<int> result = new List<int>();
+		foreach (int item in list)
+		{
+			result.Add(item);
+		}
+
+		Assert.Equal(4, result.Count);
+		Assert.Equal(1, result[0]);
+		Assert.Equal(2, result[1]);
+		Assert.Equal(3, result[2]);
+		Assert.Equal(1, result[3]);
+	}
+
+	#endregion GetEnumerator
 }
