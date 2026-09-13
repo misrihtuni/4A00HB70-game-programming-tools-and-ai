@@ -15,6 +15,61 @@ public class LinkedListTests
 		Assert.Equal("1,6,-1", list.TestGetAsString());
 	}
 
+
+	#region Clear
+
+	/// <summary>
+	/// Tests clearing an empty list.
+	/// </summary>
+	[Fact]
+	public void Clear_WhenEmpty_RemovesItemsAndSetsCountToZero()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+
+		list.Clear();
+
+		Assert.Empty(list);
+		Assert.Equal(0, list.Count);
+		Assert.Equal("", list.TestGetAsString());
+	}
+
+	/// <summary>
+	/// Tests clearing a list that has exactly one item.
+	/// </summary>
+	[Fact]
+	public void Clear_WhenOnlyOneItem_RemovesItemsAndSetsCountToZero()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+
+		list.Clear();
+
+		Assert.Empty(list);
+		Assert.Equal(0, list.Count);
+		Assert.Equal("", list.TestGetAsString());
+	}
+
+	/// <summary>
+	/// Tests clearing a list that has multiple items.
+	/// </summary>
+	[Fact]
+	public void Clear_WhenMultipleItems_RemovesItemsAndSetsCountToZero()
+	{
+		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
+		list.Add(1);
+		list.Add(2);
+		list.Add(3);
+
+		list.Clear();
+
+		Assert.Empty(list);
+		Assert.Equal(0, list.Count);
+		Assert.Equal("", list.TestGetAsString());
+	}
+
+	#endregion Clear
+
+
 	#region Contains
 
 	/// <summary>
