@@ -3,17 +3,34 @@ using Xunit;
 
 public class LinkedListTests
 {
+	#region Add
+
 	[Fact]
-	public void TestBasicAdd()
+	public void Add_WhenEmpty_CreatesNewListAndAddsGivenItemToIt()
 	{
 		GA.Collections.LinkedList<int> list = new GA.Collections.LinkedList<int>();
-		list.Add(1);
-		list.Add(6);
-		list.Add(-1);
 
-		Assert.Equal(3, list.Count);
-		Assert.Equal("1,6,-1", list.TestGetAsString());
+		list.Add(1);
+
+		Assert.Equal(1, list.Count);
+		Assert.Equal("1", list.TestGetAsString());
 	}
+
+	[Fact]
+	public void Add_WhenNotEmpty_AppendsGivenItemToTheList()
+	{
+		GA.Collections.LinkedList<int> list = [1];
+
+		list.Add(2);
+		list.Add(3);
+		list.Add(-1);
+		list.Add(0);
+
+		Assert.Equal(5, list.Count);
+		Assert.Equal("1,2,3,-1,0", list.TestGetAsString());
+	}
+
+	#endregion Add
 
 
 	#region Clear
