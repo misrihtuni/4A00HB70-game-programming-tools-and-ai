@@ -118,8 +118,6 @@ namespace GA.Collections
 			}
 
 			Node current = Head;
-			//Node next = null;
-			//Node previous = null;
 
 			while (current != null)
 			{
@@ -164,32 +162,7 @@ namespace GA.Collections
 				current = current.Next;
 			}
 
-			// while (current != null)
-			// {
-			// 	if (EqualityComparer<T>.Default.Equals(current.Value, item))
-			// 	{
-			// 		// Current node has the item to be removed.
-			// 		if (previous == null)
-			// 		{
-			// 			// Removing the first element.
-			// 			Head = current.Next;
-			// 			Head.Previous = null;
-			// 		}
-			// 		else
-			// 		{
-			// 			// Removing any other element than the first.
-			// 			previous.Next = current.Next;
-
-			// 		}
-
-			// 		Count--;
-			// 		return true;
-			// 	}
-
-			// 	previous = current;
-			// 	current = current.Next;
-			// }
-
+			// Given item was not found.
 			return false;
 		}
 
